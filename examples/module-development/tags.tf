@@ -1,7 +1,7 @@
 locals {
   dynamic_tags = {
     "LastUpdated" = data.external.generate_timestamp.result["timestamp"]
-    "Environment" = var.env
+    "Environment" = local.environment
   }
 
   os   = data.external.detect_os.result.os

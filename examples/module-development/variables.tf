@@ -1,17 +1,17 @@
 variable "env" {
-  description = "This is passed as an environment variable, it is for the shorthand environment tag for resource.  For example, production = prod"
+  description = "The Shorthand Environment name for the Resource (ie: prd = production, ppe = pre-production)"
   type        = string
   default     = "prd"
 }
 
 variable "loc" {
-  description = "The shorthand name of the Azure location, for example, for UK South, use uks.  For UK West, use ukw. Normally passed as TF_VAR in pipeline"
+  description = "The Shorthand Name of the Azure Region (ie: uks = UK South, ukw = UK West)"
   type        = string
   default     = "uks"
 }
 
 variable "short" {
-  description = "This is passed as an environment variable, it is for a shorthand name for the environment, for example hello-world = hw"
+  description = "The Shorthand Name for the Project (ie: hw = hello-world, cdo = cybear-devops)"
   type        = string
   default     = "cdo"
 }
