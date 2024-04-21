@@ -25,8 +25,8 @@ variable "Environments" {
 }
 
 locals {
-  location = lookup(var.Regions, var.loc, "UK South")
-  environment = lookup(var.Environments, var.env, "Production" )
+  location    = lookup(var.Regions, var.loc, "UK South")
+  environment = lookup(var.Environments, var.env, "Production")
 }
 
 data "external" "detect_os" {

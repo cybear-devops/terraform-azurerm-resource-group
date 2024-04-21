@@ -1,16 +1,17 @@
 ```hcl
 resource "azurerm_resource_group" "rg" {
-  name     = var.rg_name
-  location = var.location
-  tags     = var.tags
+  name       = var.name
+  location   = var.location
+  managed_by = var.managed_by
+  tags       = var.tags
 }
 
 resource "azurerm_management_lock" "rg_lock" {
   count      = var.lock_level != null && var.lock_level != "" ? 1 : 0
-  name       = "lock-${var.rg_name}"
+  name       = "lock-${var.name}"
   scope      = azurerm_resource_group.rg.id
   lock_level = var.lock_level
-  notes      = "Resource Group '${var.rg_name}' is locked with '${var.lock_level}' level."
+  notes      = "Resource '${var.name}' is locked with '${var.lock_level}' level"
 }
 ```
 ## Requirements
@@ -38,10 +39,11 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_location"></a> [location](#input\_location) | The Location (region) this resource should be put in (ie: uksouth) | `string` | n/a | yes |
-| <a name="input_lock_level"></a> [lock\_level](#input\_lock\_level) | Specifies the Lock Level to be used, possibly values are Empty (no lock), `CanNotDelete` and `ReadOnly`. | `string` | `null` | no |
-| <a name="input_rg_name"></a> [rg\_name](#input\_rg\_name) | The name of the Resource Group, this module does not create a resource group, it is expecting the value of a resource group already exists | `string` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | A map of the Tags to use on the resources that are deployed with this module | `map(string)` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | (Required) The Azure Region where the Resource should exist (ie: UK South) | `string` | n/a | yes |
+| <a name="input_lock_level"></a> [lock\_level](#input\_lock\_level) | (Required) Specifies the Level to be used for this Lock. Possibly values are Empty (no lock), `CanNotDelete` and `ReadOnly` | `string` | `null` | no |
+| <a name="input_managed_by"></a> [managed\_by](#input\_managed\_by) | (Optional) The ID of the resource or application that manages this Resource | `string` | `null` | no |
+| <a name="input_name"></a> [name](#input\_name) | (Required) The Name which should be used for this Resource | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A mapping of tags which should be assigned to the Resource | `map(string)` | n/a | yes |
 
 ## Outputs
 
